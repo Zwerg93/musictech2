@@ -9,6 +9,9 @@ import { PlayerComponent } from './components/player/player.component';
 import { SearchComponent } from './components/search/search.component';
 import { ProfileComponent } from './components/profile/profile.component';
 import { UploadComponent } from './components/upload/upload.component';
+import {HttpClientModule} from "@angular/common/http";
+import {MatIconModule} from "@angular/material/icon";
+import {MatListModule} from "@angular/material/list";
 
 @NgModule({
   declarations: [
@@ -22,7 +25,11 @@ import { UploadComponent } from './components/upload/upload.component';
   imports: [
     BrowserModule,
     AppRoutingModule,
-    BrowserAnimationsModule
+    BrowserAnimationsModule,
+    HttpClientModule,
+    MatIconModule,
+    MatListModule,
+
   ],
   providers: [],
   bootstrap: [AppComponent]

@@ -40,15 +40,15 @@ public class UserResource {
 
     @POST
     @Transactional
-    @Path("add/{id}/")
-    public Response addPlaylist(@PathParam("id") Long id, PlaylistDOT newPlaylist) {
+    @Path("addplaylist/{id}/{title}")
+    public Response addPlaylist(@PathParam("id") Long id,@PathParam("title") String title) {
 
         User user = this.userService.getUser(id);
         if (user == null) {
             return Response.status(404).build();
         }
 
-        this.userService.addPlaylist(user, newPlaylist.getName(), newPlaylist.getId());
+        this.userService.addPlaylist(user, title, id);
         return Response.ok().build();
     }
 

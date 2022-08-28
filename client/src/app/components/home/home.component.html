@@ -26,53 +26,65 @@
   </div>
 </div>
 <!-- Playlists Übersicht-->
+
+
 <div class="section">
   <div class="container text-end">
     <div class="row p-1">
-      <div class="col px-1">
-        <div class=" tiles2 w-100 py-3 bg-light d-flex justify-content-around ">
-          <i class="fa-solid fa-heart "></i>
-          <span>Favoriten</span>
-        </div>
-      </div>
-      <div class="col px-1">
-        <div class=" tiles2 w-100 py-3 bg-light d-flex justify-content-around  ">
-          <i class="fa-solid fa-heart "></i>
-          <span>Favoriten</span>
-        </div>
-      </div>
-    </div>
-    <div class="row p-1">
-      <div class="col px-1">
-        <div class=" tiles2 w-100 py-3 bg-light d-flex justify-content-around  ">
-          <i class="fa-solid fa-heart "></i>
-          <span>Favoriten</span>
-        </div>
-      </div>
-      <div class="col px-1">
-        <div class=" tiles2 w-100 py-3 bg-light d-flex justify-content-around  ">
-          <i class="fa-solid fa-heart "></i>
-          <span>Favoriten</span>
-        </div>
-      </div>
-    </div>
-    <div class="row p-1">
-      <div class="col px-1">
-        <div class=" tiles2 w-100 py-3 bg-light d-flex justify-content-around  ">
-          <i class="fa-solid fa-heart "></i>
-          <span>Favoriten</span>
-        </div>
-      </div>
-      <div class="col px-1">
-        <div class=" tiles2 w-100 py-3 bg-light d-flex justify-content-around  ">
-          <i class="fa-solid fa-heart "></i>
-          <span>Favoriten</span>
-        </div>
-      </div>
-    </div>
+
+      <div *ngFor="let user of playlist; index as i; first as isFirst">
+        <div *ngIf="(i-1) % 2">
+          <div class="row p-1">
+
+            <div class="col px-1">
+              <div class=" tiles2 w-100 py-3 bg-light d-flex justify-content-around  ">
+                <i class="fa-solid fa-heart "></i>
+                <span>{{playlist[i].name}}</span>
+              </div>
+            </div>
 
 
+            <div class="col px-1">
+              <div class=" tiles2 w-100 py-3 bg-light d-flex justify-content-around  ">
+                <i class="fa-solid fa-heart "></i>
+                <span>{{playlist[i + 1].name}}</span>
+              </div>
+            </div>
+
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div> <!--Section End-->
+
+<!--Player shortcut-->
+<div class="section">
+  <div class="container">
+    <div class="row p-1 ">
+      <div class="col px-1">
+        <div class="playerShortcut w-100 py-3 bg-dark">
+          <div class="start-0 px-3">
+            <a class="h3 text-light "> {{playerService.currentSongName}}</a>
+
+          </div>
+          <div class="end-100 px-2">
+            <i class="px-3 h4 fa-solid text-light fa-heart  "></i>
+
+            <button class="bg-dark border-0 h4 mx-1 fix-size" (click)="play()" [disabled]="playerService.state?.error"
+                    *ngIf="!playerService.state?.playing">
+              <i class="fa-solid fa-play text-light"></i>
+            </button>
+
+            <button class="bg-dark border-0 h4 mx-1 fix-size" (click)="pause()" *ngIf="playerService.state?.playing">
+              <i class="fa-solid fa-pause text-light "></i>
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
   </div>
 </div>
+
 </body>
 </html>

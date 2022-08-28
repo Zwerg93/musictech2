@@ -1,1 +1,44 @@
-<p>player works!</p>
+<div class="container">
+  <div class="content text-black">
+    <mat-list color="primary">
+      <h3 mat-subheader>Songs</h3>
+      <mat-list-item *ngFor="let file of cloudService.songlist; let i = index" (click)="playerService.openFile(file, i)">
+        <mat-list-item (click)="currentSongClickedon(i)" > <!--data-bs-toggle="modal" data-bs-target="#staticBackdrop"-->
+          <mat-icon color="primary" mat-list-icon>music_note</mat-icon>
+          <h4 mat-line class="text-light overflow-auto ">{{ file.name }}</h4>
+          <h5 mat-line class="text-light">by {{ file.artist }}</h5>
+          <h6 *ngIf="playerService.currentFile.index === i && playerService.state?.error">ERROR</h6>
+          <mat-divider></mat-divider>
+        </mat-list-item>
+      </mat-list-item>
+    </mat-list>
+  </div>
+</div>
+
+<!--Player shortcut-->
+<div class="section">
+  <div class="container">
+    <div class="row p-1 ">
+      <div class="col px-1">
+        <div class="playerShortcut w-100 py-3 bg-dark">
+          <div class="start-0 px-3">
+            <a class="h3 text-light "> {{playerService.currentSongName}}</a>
+
+          </div>
+          <div class="end-100 px-2">
+            <i class="px-3 h4 fa-solid text-light fa-heart  "></i>
+
+            <button class="bg-dark border-0 h4 mx-1 fix-size" (click)="play()" [disabled]="playerService.state?.error"
+                    *ngIf="!playerService.state?.playing">
+              <i class="fa-solid fa-play text-light"></i>
+            </button>
+
+            <button class="bg-dark border-0 h4 mx-1 fix-size" (click)="pause()" *ngIf="playerService.state?.playing">
+              <i class="fa-solid fa-pause text-light "></i>
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

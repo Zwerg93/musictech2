@@ -14,3 +14,13 @@ body{
   align-items: center;
   border-radius: 2vw;
 }
+
+.playerShortcut{
+  display: flex;
+  justify-content: space-between;
+  margin-top: 40vh;
+  border-radius: 2vw;
+}
+.fix-size{
+  width: 8vw;
+}
