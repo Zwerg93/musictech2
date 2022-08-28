@@ -15,6 +15,7 @@ export class PlayerComponent implements OnInit {
   }
 
   ngOnInit(): void {
+
   }
 
   play() {
