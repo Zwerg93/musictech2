@@ -12,9 +12,10 @@ import {timer} from "rxjs";
 export class HomeComponent implements OnInit {
   playlist: any;
   state;
+  toggle: any;
 
 
-  constructor(private audioService: AudioService, private cloudService: CloudService, public playerService: PlayerService) {
+  constructor(public audioService: AudioService, public cloudService: CloudService, public playerService: PlayerService) {
     this.state = playerService.state;
   }
 
@@ -35,4 +36,13 @@ export class HomeComponent implements OnInit {
   }
 
 
+  console(test: string) {
+    console.log(test)
+  }
+
+  getPlaylist(index) {
+    console.log(this.cloudService.playlists[index].songList);
+    this.cloudService.songlist = this.cloudService.playlists[index].songList;
+
+  }
 }

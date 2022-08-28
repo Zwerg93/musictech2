@@ -11,6 +11,7 @@ export class CloudService {
   }
 
   public songlist: { url: string, name: string, artist: string }[] = [];
+  public songlist_TMP: { url: string, name: string, artist: string }[] = [];
   public playlists: any;
 
   onload() {
@@ -18,6 +19,7 @@ export class CloudService {
     //http://localhost:8080/song/all
     this.http.get('http://localhost:8080/song/all').toPromise().then((response: any) => {
       this.songlist = response;
+      this.songlist_TMP = response;
       console.table(this.songlist);
     });
     sessionStorage.setItem('username', 'marcel');

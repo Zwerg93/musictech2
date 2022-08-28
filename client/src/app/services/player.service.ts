@@ -20,7 +20,8 @@ export class PlayerService {
   status = 'Enable';
   private tmp: boolean = true;
 
-  constructor(private audioService: AudioService, cloudService: CloudService) {
+  constructor(private audioService: AudioService, public cloudService: CloudService) {
+
     this.audioService.getState()
       .subscribe(state => {
         this.state = state;
@@ -60,7 +61,7 @@ export class PlayerService {
           array[randomIndex], array[currentIndex]];
       }
     } else {
-      this.files = this.tmpFiles;
+      this.cloudService.songlist = this.tmpFiles;
       this.tmp = true;
       //console.log("test")
     }
@@ -69,8 +70,8 @@ export class PlayerService {
   }
 
   random() {
-    const index = this.randomIntFromInterval(0, this.files.length - 1);
-    const file = this.files[index];
+    const index = this.randomIntFromInterval(0, this.cloudService.songlist.length - 1);
+    const file = this.cloudService.songlist[index];
     this.openFile(file, index);
     //console.log(index);
   }
@@ -81,7 +82,7 @@ export class PlayerService {
 
   next() {
     const index = this.currentFile.index + 1;
-    const file = this.files[index];
+    const file = this.cloudService.songlist[index];
     this.openFile(file, index);
     this.currentSongName = this.currentFile.file.name;
     this.audioService.audioObj.currentTime;
@@ -89,8 +90,10 @@ export class PlayerService {
 
   previous() {
     const index = this.currentFile.index - 1;
-    const file = this.files[index];
+    const file =this.cloudService.songlist[index];
+
     this.openFile(file, index);
+    this.currentSongName = this.currentFile.file.name;
   }
 
   isFirstPlaying() {
@@ -103,7 +106,7 @@ export class PlayerService {
   }
 
   isLastPlaying() {
-    return this.currentFile.index === this.files.length - 1;
+    return this.currentFile.index === this.cloudService.songlist.length - 1;
   }
 
   onSliderChangeEnd(change) {
@@ -119,13 +122,13 @@ export class PlayerService {
   }
 
   searchForString(event: any) {
-    this.files = this.tmpFiles.filter((file: { name: string }) => {
+    this.cloudService.songlist = this.tmpFiles.filter((file: { name: string }) => {
       return file.name.toLowerCase().includes(this.searchstring.toLowerCase());
     })
   }
 
   cancelSearch() {
-    this.files = this.tmpFiles;
+    this.cloudService.songlist = this.tmpFiles;
     (<HTMLInputElement>document.getElementById("searchinput")).value = '';
   }
 
@@ -134,18 +137,15 @@ export class PlayerService {
 
   currentSongClickedon(i) {
     //console.log(this.files[i].name);
-    this.currentSongName = this.files[i].name;
-    this.currentArtist = this.files[i].artist;
+    this.currentSongName = this.cloudService.songlist[i].name;
+    this.currentArtist = this.cloudService.songlist[i].artist;
   }
 
 
-  getSongsFromPlalist(id: number) {
 
-   // this.files = this.itemList[id].songList;
-  }
 
 
   allSongs() {
-    this.files = this.tmpFiles;
+    this.cloudService.songlist = this.tmpFiles;
   }
 }

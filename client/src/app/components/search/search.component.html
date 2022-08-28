@@ -1,1 +1,39 @@
-<p>search works!</p>
+<!doctype html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport"
+        content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Search</title>
+
+</head>
+<body class="bg-dark">
+
+<div class="container position-sticky   ">
+  <form class="d-flex">
+    <input id="input" class="form-control bg-dark text-light me-2"
+           placeholder="Search" aria-label="Search" type="search"/>
+    <p (click)="test();" class="btn bg-primary" >asd</p>
+
+  </form>
+</div>
+
+<div class="container text-light py-2 my-2 bg-dark " id="listofsearchresult">
+  <ul>
+    <div class="" *ngIf="this.itemList != null">
+      <p class=" tiles2 w-100 py-3 bg-light text-dark d-flex justify-content-around" *ngFor="let item of this.itemList.items; let i = index">
+
+        {{ item.snippet.title }}
+        <i (click)="download(item.id.videoId, item.snippet.title)" class="text-dark fa-solid fa-download"></i>
+
+      </p>
+    </div>
+  </ul>
+</div>
+
+
+
+<div id="showresult"></div>
+</body>
+</html>

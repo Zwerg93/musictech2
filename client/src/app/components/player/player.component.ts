@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {AudioService} from "../../services/audio.service";
 import {CloudService} from "../../services/cloud.service";
 import {PlayerService} from "../../services/player.service";
@@ -9,23 +9,28 @@ import {PlayerService} from "../../services/player.service";
   styleUrls: ['./player.component.scss']
 })
 export class PlayerComponent implements OnInit {
+  toggle: any;
 
-  constructor(public audioService: AudioService, public cloudService: CloudService, public playerService: PlayerService  ) {
+  constructor(public audioService: AudioService, public cloudService: CloudService, public playerService: PlayerService) {
   }
 
   ngOnInit(): void {
   }
 
   play() {
-    console.log(this.cloudService.songlist)
     this.playerService.play();
   }
-  pause(){
+
+  pause() {
     this.playerService.pause();
   }
 
   currentSongClickedon(i) {
     this.playerService.currentSongName = this.cloudService.songlist[i].name;
     this.playerService.currentArtist = this.cloudService.songlist[i].name;
+  }
+
+  openOptions() {
+    console.log("Test")
   }
 }

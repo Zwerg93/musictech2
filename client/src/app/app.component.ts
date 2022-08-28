@@ -10,7 +10,11 @@ export class AppComponent {
   title = 'client';
 
 
-  constructor(cloudService: CloudService) {
+  constructor(public cloudService: CloudService) {
     cloudService.onload()
+  }
+
+  resetSonglist() {
+    this.cloudService.songlist = this.cloudService.songlist_TMP;
   }
 }

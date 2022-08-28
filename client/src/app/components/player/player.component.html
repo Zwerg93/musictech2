@@ -1,12 +1,28 @@
+<!doctype html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport"
+        content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Player</title>
+</head>
+<body>
+
+<!--Songs-->
 <div class="container">
   <div class="content text-black">
     <mat-list color="primary">
       <h3 mat-subheader>Songs</h3>
-      <mat-list-item *ngFor="let file of cloudService.songlist; let i = index" (click)="playerService.openFile(file, i)">
-        <mat-list-item (click)="currentSongClickedon(i)" > <!--data-bs-toggle="modal" data-bs-target="#staticBackdrop"-->
-          <mat-icon color="primary" mat-list-icon>music_note</mat-icon>
-          <h4 mat-line class="text-light overflow-auto ">{{ file.name }}</h4>
-          <h5 mat-line class="text-light">by {{ file.artist }}</h5>
+      <mat-list-item *ngFor="let file of cloudService.songlist; let i = index">
+        <mat-list-item > <!--data-bs-toggle="modal" data-bs-target="#staticBackdrop"-->
+          <mat-icon (click)="currentSongClickedon(i); playerService.openFile(file, i);" color="primary" mat-list-icon>music_note</mat-icon>
+          <h4 (click)="currentSongClickedon(i); playerService.openFile(file, i);" mat-line class="text-light overflow-auto ">{{ file.name }}</h4>
+          <div class="spacer2" > <i  (click)="openOptions()" class="fa-solid fa-ellipsis-vertical"></i></div>
+
+
+
+          <h5 (click)="currentSongClickedon(i); playerService.openFile(file, i);" mat-line class="text-light">by {{ file.artist }}</h5>
           <h6 *ngIf="playerService.currentFile.index === i && playerService.state?.error">ERROR</h6>
           <mat-divider></mat-divider>
         </mat-list-item>
@@ -15,6 +31,8 @@
   </div>
 </div>
 
+
+
 <!--Player shortcut-->
 <div class="section">
   <div class="container">
@@ -22,7 +40,8 @@
       <div class="col px-1">
         <div class="playerShortcut w-100 py-3 bg-dark">
           <div class="start-0 px-3">
-            <a class="h3 text-light "> {{playerService.currentSongName}}</a>
+            <a class="h6 text-light " data-bs-toggle="modal"
+               data-bs-target="#staticBackdrop"> {{playerService.currentSongName}}</a>
 
           </div>
           <div class="end-100 px-2">
@@ -36,9 +55,95 @@
             <button class="bg-dark border-0 h4 mx-1 fix-size" (click)="pause()" *ngIf="playerService.state?.playing">
               <i class="fa-solid fa-pause text-light "></i>
             </button>
+
+
           </div>
         </div>
+
       </div>
     </div>
   </div>
 </div>
+
+
+<!--Modal -->
+<div class="modal bg-dark  fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false"
+     tabindex="-1"
+     aria-labelledby="staticBackdropLabel" aria-hidden="true">
+  <div class="modal-dialog ">
+    <div class="modal-content bg-dark">
+      <div class="modal-header">
+        <h5 class="modal-title text-light" id="staticBackdropLabel">{{playerService.currentSongName}}</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class=" modal-body h-100">
+
+        <div class="spacer"></div>
+        <div>
+          <div class="text-light d-flex w-100 justify-content-between text-primary">
+            <div class=" h6 text-primary mt-1"> {{ playerService.state?.readableCurrentTime }}</div>
+            <div class="h6 text-primary mt-1  ">{{ playerService.state?.readableDuration }}</div>
+          </div>
+
+          <div class="w-100 d-flex justify-content-center">
+            <mat-slider class="w-50 col time-slider text-light" min="0" [max]="playerService.state?.duration" step="1"
+                        [value]="playerService.state?.currentTime"
+                        (input)="playerService.onSliderChangeEnd($event)"></mat-slider>
+          </div>
+        </div>
+
+
+        <div class="d-flex justify-content-center">
+          <button class="bg-dark border-0 h4 mx-1 fix-size">
+            <i class="text-primary h4 fa-solid fa-heart  "></i>
+          </button>
+
+          <button class="bg-dark border-0 h4 mx-3 fix-size"  [disabled]="playerService.isFirstPlaying()" (click)="playerService.previous()">
+            <mat-icon class="text-primary" mat-list-icon>skip_previous</mat-icon>
+          </button>
+          <button class="bg-dark border-0 h4 mx-3 fix-size"(click)="play()" [disabled]="playerService.state?.error"
+                  *ngIf="!playerService.state?.playing">
+            <mat-icon class="text-primary" mat-list-icon>play_circle_filled</mat-icon>
+          </button>
+          <button class="bg-dark border-0 h4 mx-3 fix-size" (click)="pause()" *ngIf="playerService.state?.playing">
+            <mat-icon class="text-primary" mat-list-icon>pause</mat-icon>
+          </button>
+          <button class="bg-dark border-0 h4 mx-3 fix-size" [disabled]="playerService.isLastPlaying()" (click)="playerService.next()">
+            <mat-icon class="text-primary" mat-list-icon>skip_next</mat-icon>
+          </button>
+          <button id="shuffleButton"class="bg-dark border-0 h4 mx-3 fix-size" (click)="playerService.shuffle(cloudService.songlist)"
+                  [ngClass]=" {'green' : toggle, 'red': !toggle}">
+            <i class="text-primary fa-solid fa-shuffle"></i>
+          </button>
+
+
+        </div>
+      </div>
+
+      <div class=" modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+
+      </div>
+    </div>
+  </div>
+</div>
+
+<script src="./script.js"></script>
+<script>
+  var volume = document.querySelector("#volume-control");
+  volume.addEventListener("change", function (e) {
+    this.currentFile.volume = e.currentTarget.value / 100;
+  });
+
+  var myModal = document.getElementById('myModal')
+  var myInput = document.getElementById('myInput')
+
+  myModal.addEventListener('shown.bs.modal', function () {
+    myInput.focus()
+  })
+
+</script>
+
+
+</body>
+</html>

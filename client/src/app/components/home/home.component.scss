@@ -18,9 +18,14 @@ body{
 .playerShortcut{
   display: flex;
   justify-content: space-between;
-  margin-top: 40vh;
+  margin-top: 1vh;
   border-radius: 2vw;
+  position: fixed;
+  top: 80vh;
 }
 .fix-size{
   width: 8vw;
+}
+.spacer{
+  margin-top: 120vw;
 }
