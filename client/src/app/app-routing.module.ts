@@ -4,7 +4,7 @@ import {HomeComponent} from "./components/home/home.component";
 import {PlayerComponent} from "./components/player/player.component";
 import {ProfileComponent} from "./components/profile/profile.component";
 import {SearchComponent} from "./components/search/search.component";
-import {UploadComponent} from "./upload/upload.component";
+import {UploadComponent} from "./components/upload/upload.component";
 
 const routes: Routes = [{
   path: '',
