@@ -123,7 +123,7 @@ public class YoutubeResource {
         FileOutputStream fos = null;
         try {
             ///home/marcel/musictech/files/
-            fos = new FileOutputStream("C:\\Schule\\musictech2\\Files" + title + ".mp3"); // be carefull when Publish
+            fos = new FileOutputStream("~/musictech2/files/" + title + ".mp3"); // be carefull when Publish
         } catch (FileNotFoundException e) {
             e.printStackTrace();
         }

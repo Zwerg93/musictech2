@@ -24,7 +24,7 @@ public class UploadResource {
     @Inject
     SongRepo repo;
 
-    private final String UPLOADED_FILE_PATH = "C:\\Schule\\musictech2\\Files";
+    private final String UPLOADED_FILE_PATH = "~/musictech2/files/";
 
     //private final String UPLOADED_FILE_PATH = "C:\Schule\4BHITM\sew\musictech\files";
 
