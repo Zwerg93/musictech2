@@ -15,7 +15,8 @@
     <mat-list color="primary">
       <h3 mat-subheader>Songs</h3>
       <mat-list-item *ngFor="let file of cloudService.songlist; let i = index">
-        <mat-list-item > <!--data-bs-toggle="modal" data-bs-target="#staticBackdrop"-->
+        <mat-list-item data-bs-toggle="modal"
+                       data-bs-target="#staticBackdrop"> {{playerService.currentSongName}} > <!--data-bs-toggle="modal" data-bs-target="#staticBackdrop"-->
           <mat-icon (click)="currentSongClickedon(i); playerService.openFile(file, i);" color="primary" mat-list-icon>music_note</mat-icon>
           <h4 (click)="currentSongClickedon(i); playerService.openFile(file, i);" mat-line class="text-light overflow-auto ">{{ file.name }}</h4>
           <div class="spacer2" > <i  (click)="openOptions()" class="fa-solid fa-ellipsis-vertical"></i></div>
