@@ -24,7 +24,7 @@ public class UploadResource {
     @Inject
     SongRepo repo;
 
-    private final String UPLOADED_FILE_PATH = "~/musictech2/files/";
+    private final String UPLOADED_FILE_PATH = "/home/marcel/musictech2/files/";
 
     //private final String UPLOADED_FILE_PATH = "C:\Schule\4BHITM\sew\musictech\files";
 
@@ -52,10 +52,11 @@ public class UploadResource {
                 InputStream inputStream = inputPart.getBody(InputStream.class, null);
                 System.out.println(fileName);
 
-                postURL = "/api/uploadFile/download/" + fileName;
+                //postURL = "/api/uploadFile/download/" + fileName;
 
 
                 //postURL = "http://localhost:8080/uploadFile/download/" + fileName;
+                postURL = "http://83.215.72.88:8080/uploadFile/download/" + fileName;
                 System.out.println(postURL);
                 Song song = new Song(fileName, postURL);
                 repo.addSong(song);
