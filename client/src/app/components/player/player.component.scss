@@ -21,19 +21,27 @@ body{
   margin-top: 1vh;
   border-radius: 2vw;
   position: fixed;
-  top: 65vh;
+  top: 80%;
+
 }
 .fix-size{
   width: 8vw;
 }
 .spacer{
-  margin-top: 120vw;
+  margin-top: 60vh;
 }
 .spacer2{
   padding-left: 5vw;
   padding-right: 5vw;
 
 }
+.overflow-test{
+  overflow-y: scroll;
+}
 #songContainer{
-  overflow-y: auto;
+  height: 80vh;
+  overflow-y: scroll;
+}
+.mat-list-item-content{
+  width: 100%;
 }

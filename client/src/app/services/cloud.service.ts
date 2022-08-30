@@ -30,7 +30,7 @@ export class CloudService {
       this.http.get('http://83.215.72.88:8080/user/getPlalist/' + sessionStorage.getItem('username')).toPromise().then((response: any) => {
 
         this.playlists = response;
-        console.table(this.playlists[0].songList[0].url + " Playlists");
+      //  console.table(this.playlists[0].songList[0].url + " Playlists");
 
         //  this.files = this.itemList[0].songList;
       })
