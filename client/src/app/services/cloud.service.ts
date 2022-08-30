@@ -17,7 +17,7 @@ export class CloudService {
   onload() {
     ///api/song/all
     //http://localhost:8080/song/all
-    this.http.get('http://83.215.72.88:4200/song/all').toPromise().then((response: any) => {
+    this.http.get('http://83.215.72.88:8080/song/all').toPromise().then((response: any) => {
       this.songlist = response;
       this.songlist_TMP = response;
       console.table(this.songlist);
@@ -27,7 +27,7 @@ export class CloudService {
     //if (sessionStorage.getItem('username') != null) {
       // /api/user/getPlalist/
       //http://localhost:8080/
-      this.http.get('http://83.215.72.88:4200/user/getPlalist/' + sessionStorage.getItem('username')).toPromise().then((response: any) => {
+      this.http.get('http://83.215.72.88:8080/user/getPlalist/' + sessionStorage.getItem('username')).toPromise().then((response: any) => {
 
         this.playlists = response;
         console.table(this.playlists[0].songList[0].url + " Playlists");

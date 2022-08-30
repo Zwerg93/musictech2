@@ -33,7 +33,7 @@ export class SearchComponent implements OnInit {
     if (this.searchstring != "") {
       ///api/youtube/download/
       //http://localhost:8080/youtube/download/
-      this.http.get('http://83.215.72.88:4200/youtube/download/' + this.searchstring).toPromise().then((response: any) => {
+      this.http.get('http://83.215.72.88:8080/youtube/download/' + this.searchstring).toPromise().then((response: any) => {
         this.itemList = response[0];
        // console.log(this.searchstring)
         console.table(response);
@@ -58,7 +58,7 @@ export class SearchComponent implements OnInit {
 
   download(number: any, title: String) {
 //http://localhost:8080/youtube/download/mp3/
-    this.http.get('http://83.215.72.88:4200/youtube/download/mp3/' + number + '/' + title + '').subscribe(
+    this.http.get('http://83.215.72.88:8080/youtube/download/mp3/' + number + '/' + title + '').subscribe(
       result => {
       },
       error => {
